@@ -1,6 +1,6 @@
 $(function(){
 	//Basic Models
-	var host = 'http://localhost:5000'
+	var host = 'http://filmsinsf.herokuapp.com'
 	var Film = Backbone.Model.extend({
 		idAttribute: 'id'
 	});
