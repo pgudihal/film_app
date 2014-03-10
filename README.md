@@ -46,11 +46,17 @@ Trade-offs
 ==========
 If I had more time I compiled a list of things I would probably work on
 1. User Authentication to allow full range of CRUD on the API
+
 2. Fix the autocomplete issue on the search where it doesn't always repopulate the markers
+
 3. More time on Front-end to display more data about each film when selected
+
 4. Link the film to its imdb page to allow the user to get more info
+
 5. Security enhancements to the whole app in general
+
 6. General UI enhancements and UX enhancements
+
 7. Use/learn Require.js to split the .js files into more readable chunks
 
 
