@@ -3,6 +3,9 @@ Uber Coding Challenge
 
 Link to App: http://filmsinsf.herokuapp.com/
 
+
+For running the app locally: app.py is the main application file
+
 Project Selection
 ==================
 SF Movies - Create a service that shows on a map where movies have been filmed in San Francisco. The user should be able to filter the view using autocompletion search.
