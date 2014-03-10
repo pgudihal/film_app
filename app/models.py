@@ -51,7 +51,7 @@ class Film(db.Model):
 			locAddresses.append([location.id, location.address])
 		return locAddresses
 	#basic __repr__ 
-	def __repr__(self):
+	def __repr__(self): #pragma: no cover
 		return '<Film %r>' % self.title
 #Location Model
 class Location(db.Model):
@@ -71,5 +71,5 @@ class Location(db.Model):
 	def get_location_info(self):
 		return { 'id': self.id, 'address': self.address,'lat': self.lat, 'long':self.long}
 	
-	def __repr__(self):
+	def __repr__(self): #pragma: no cover
 		return '<Location %r>' % self.address
