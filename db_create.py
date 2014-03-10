@@ -84,10 +84,7 @@ for i,data in enumerate(films['data']):
 
 db.session.commit()
 
-	
 
-
-#db.session.commit()
 if not os.path.exists(SQLALCHEMY_MIGRATE_REPO):
     api.create(SQLALCHEMY_MIGRATE_REPO, 'database repository')
     api.version_control(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO)

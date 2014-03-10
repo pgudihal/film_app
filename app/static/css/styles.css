@@ -1,3 +1,10 @@
+/*
+Super minimal CSS. I'm not overly familiar with CSS so I 
+went with the bare minimum to get something on the screen for
+now. Used Bootstrap as well (not much though)
+*/
+
+
 html { 
 	height: 100%; 
 }
@@ -16,6 +23,9 @@ body {
 	height: 0px;
 }
 
+/*
+	Auto-complete stuff
+*/
 .ui-helper-hidden-accessible{
     display: none;
 }

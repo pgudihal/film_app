@@ -13,23 +13,20 @@ for data in rows['data']:
 #remove dupes
 locations = list(set(address))
 finalLocs = []
-i = 0
 print len(locations)
+#Build location data and Geocode lat/lng coordinates for easy use later on
 for location in locations:
 	if location:
 		try:
 			result = Geocoder.geocode(location+", San Francisco")
 		except:
-			print "ERROR of some sort, fuck it"
+			print "ERROR of some sort,move on"
 			pass
+		# To avoid Query overload
 		time.sleep(1)
-		i+=1
-		print i
 		if result:
-			print result.coordinates
 			finalLocs.append((location, result[0].coordinates[0], result[0].coordinates[1]))
+			
+#Write to a json file
 with open('locations.json','w') as outfile:
 	json.dump({'locations' : finalLocs}, outfile)
-
-results = Geocoder.geocode("90 Gold Street, San Francisco")
-print results[0].coordinates

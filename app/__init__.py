@@ -1,11 +1,13 @@
 import os
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
-
+##Initialize all the Flask stuff
 app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 
+#A solution for logging data on Heroku from my flask App
+# Also from Miguel Grinberg's Mega Tutorials
 if not app.debug and os.environ.get('HEROKU') is None:
     import logging
     from logging.handlers import RotatingFileHandler

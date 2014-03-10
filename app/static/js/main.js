@@ -1,6 +1,7 @@
 $(function(){
 	//Basic Models
 	var host = 'http://filmsinsf.herokuapp.com'
+	//Set id attributes
 	var Film = Backbone.Model.extend({
 		idAttribute: 'id'
 	});
@@ -49,9 +50,12 @@ $(function(){
 		markers: [],
 		
 		initialize: function(){
+			//Check for Autocomplete events (these aren't comprehensive)
+			//TODO: Find a way to reset markers if the autocomplete search box is empty
 			Backbone.pubSub.on('autocompleteSelected', this.getMarkersForFilm,this);
 			Backbone.pubSub.on('autocompleteClosed', this.removeMarkers,this);
 		
+			//Set up Google Maps Map
 			var mapOptions = {
 				center: new google.maps.LatLng(37.7833, -122.4167),
 				zoom: 13
@@ -90,13 +94,18 @@ $(function(){
 				location.get('lat'),
 				location.get('long')
 			);
+			//Create a marker at location
 			marker = new google.maps.Marker({
 				map: self.googleMap,
 				position: ltLn,
 				title: location.get('address'),
 				clickable: true
 			});
+			//Add it to our Marker list from earlier
 			self.markers.push(marker);
+			
+			//Create the info windows which aggregate all the movies at a location
+			//This is a minimal application of the API backend
 			var info = new google.maps.InfoWindow({content: ''});
 			var filmsAtLocation;
 			if(typeof filmAtLocationList.get(location.get('id'))!= 'undefined')
@@ -117,6 +126,7 @@ $(function(){
 				});
 			}			
 		},
+		//Remove all markers
 		removeMarkers: function(bool){
 			while(this.markers.length){
 				this.markers.pop().setMap(null);
@@ -130,6 +140,8 @@ $(function(){
 			this.removeMarkers(false);
 			var locations = film[0].get('locations');
 			for(i=0; i<locations.length;i++){
+				//This could be clearer but the serialized location info doesn't have 
+				// tags TODO: Refactor serialization on the film -> locations
 				var loc = locations[i][0];
 				self.createLocationMarker(locationList.get(loc));
 			}
@@ -148,23 +160,21 @@ $(function(){
 		},
 		initializeAutoComplete: function(){
 			var self = this;
+			//This isn't correctly removing and redisplaying markers yet
 			$('#autocomplete').autocomplete({
-				source: filmList.pluck('title'),
+				source: filmList.pluck('title'), //ARGH where was this function earlier #@$!
 				minLength: 1,
 				focus: function(event, ui){
-					console.log('FOCUS');
 					var film = filmList.where({title : ui.item.value});
 					//console.log(film);
 					Backbone.pubSub.trigger('autocompleteSelected',film);
 				},
 				select: function(event, ui){
-					console.log('SELECT');
 					var film = filmList.where({title : ui.item.value});
 					//console.log(ui.item.value);
 					Backbone.pubSub.trigger('autocompleteSelected',film);
 				},
 				change: function(event, ui){
-					console.log('CHANGE');
 					if(!ui.item){
 						Backbone.pubSub.trigger('autocompleteClosed',true);
 					}
