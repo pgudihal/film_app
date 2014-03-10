@@ -19,7 +19,7 @@ def get_films():
 def get_film(film_id):
 	return jsonify({'film':models.Film.query.filter_by(id=film_id).first().get_info()})
 
-@app.route('/sfilm/api/v1/films/<int:film_id>/locations', methods= ['GET'])
+@app.route('/sfilm/api/v1/films/locations/<int:film_id>', methods= ['GET'])
 def get_film_locations(film_id):
 	return jsonify({'locations': models.Film.query.filter_by(id=film_id).first().get_all_locations()})
 
