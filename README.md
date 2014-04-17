@@ -1,10 +1,3 @@
-Uber Coding Challenge
-=====================
-
-Link to App: http://filmsinsf.herokuapp.com/
-
-
-For running the app locally: app.py is the main application file
 
 Project Selection
 ==================
